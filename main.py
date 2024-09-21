@@ -249,17 +249,19 @@ def get_link(message):
 # In[7]:
 
 
-@bot.callback_query_handler(func=lambda call: True)
-def handle_callback_query(call):
-  bot.send_message(call.message.chat.id, "..")
+@bot.callback_query_handler(func=lambda call: call.data == "games")
+def handle_games_callback(call):
+    img_link2 = "https://i.postimg.cc/zvDbVTS0/photo-5893070682508606110-x.jpg"
+    bot.send_photo(
+        call.message.chat.id,
+        img_link2,
+        caption=(
+            "روابط ألعاب جمع العملات المعدنية لإستعمالها في خفض السعر لبعض المنتجات، "
+            "قم بالدخول يوميا لها للحصول على أكبر عدد ممكن في اليوم 👇"
+        ),
+        reply_markup=keyboard_games
+    )
 
-  img_link2 = "https://i.postimg.cc/zvDbVTS0/photo-5893070682508606110-x.jpg"
-  bot.send_photo(
-      call.message.chat.id,
-      img_link2,
-      caption=
-      "روابط ألعاب جمع العملات المعدنية لإستعمالها في خفض السعر لبعض المنتجات، قم بالدخول يوميا لها للحصول على أكبر عدد ممكن في اليوم 👇",
-      reply_markup=keyboard_games)
 
 if __name__ == '__main__':
     webhook_url = "https://bb342f2c-ef03-4dd8-adee-15e832527549-00-3pmbxkljq9162.worf.replit.dev/"
