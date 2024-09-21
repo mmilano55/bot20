@@ -114,7 +114,7 @@ def get_affiliate_links(message, message_id, link):
   try:
 
     affiliate_link = aliexpress.get_affiliate_links(
-        f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=620&aff_fcid='
+        f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=620&channel=coin&aff_fcid='
     )
     affiliate_link = affiliate_link[0].promotion_link
 
