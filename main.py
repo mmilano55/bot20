@@ -136,6 +136,7 @@ def get_affiliate_links(message, message_id, link):
           f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}'
       ])
       price_pro = img_link[0].target_sale_price
+      sold_quantity = img_link[0].total_sales
       title_link = img_link[0].product_title
       img_link = img_link[0].product_main_image_url
       print(img_link)
