@@ -114,56 +114,64 @@ def button_click(callback_query):
 
 def get_affiliate_links(message, message_id, link):
   try:
-    # جلب الروابط التابعة
+
     affiliate_link = aliexpress.get_affiliate_links(
         f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=620&channel=coin&aff_fcid='
-    )[0].promotion_link
+    )
+    affiliate_link = affiliate_link[0].promotion_link
 
     super_links = aliexpress.get_affiliate_links(
         f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=562&aff_fcid='
-    )[0].promotion_link
+    )
+    super_links = super_links[0].promotion_link
 
     limit_links = aliexpress.get_affiliate_links(
         f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=561&aff_fcid='
-    )[0].promotion_link
-
-    # جلب تفاصيل المنتج
-    product_details = aliexpress.get_products_details([link])[0]
-
-    # استخراج المعلومات المطلوبة
-    price_pro = product_details.target_sale_price  # السعر العادي
-    discount_price = product_details.sale_price  # السعر المخفض
-    title_link = product_details.product_title  # عنوان المنتج
-    img_link = product_details.product_main_image_url  # صورة المنتج
-    sold_quantity = product_details.total_sales  # عدد القطع المباعة
-    rating = product_details.average_rating  # تقييم المنتج
-    shipping_cost = product_details.shipping_fee  # تكاليف الشحن
-
-    # حذف الرسالة السابقة وإرسال المعلومات الجديدة
-    bot.delete_message(message.chat.id, message_id)
-    bot.send_photo(
-        message.chat.id,
-        img_link,
-        caption=(
-            f"🛒 منتجك هو  : 🔥 \n{title_link} 🛍 \n"
-            f"✅ عدد القطع المباعة: {sold_quantity} \n"
-            f"⭐️ تقييم المنتج: {rating}/5 \n"
-            f"📦 تكاليف الشحن: {shipping_cost} دولار 💵\n"
-            f"💰 السعر العادي: {price_pro} دولار 💵\n"
-            f"🔖 السعر المخفض: {discount_price} دولار 💵\n\n"
-            "💰 عرض العملات (السعر النهائي عند الدفع)  : \n"
-            f"الرابط {affiliate_link} \n"
-            "💎 عرض السوبر  : \n"
-            f"الرابط {super_links} \n"
-            "♨️ عرض محدود  : \n"
-            f"الرابط {limit_links} \n\n"
-            "#MagicBot ✅"
-        ),
-        reply_markup=keyboard
     )
-  except Exception as e:
-    bot.send_message(message.chat.id, "حدث خطأ أثناء جلب المعلومات 🤷🏻‍♂️")
-    
+    limit_links = limit_links[0].promotion_link
+
+    try:
+      img_link = aliexpress.get_products_details([
+          '1000006468625',
+          f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}'
+      ])
+      price_pro = img_link[0].target_sale_price
+      title_link = img_link[0].product_title
+      img_link = img_link[0].product_main_image_url
+      print(img_link)
+      bot.delete_message(message.chat.id, message_id)
+      bot.send_photo(message.chat.id,
+                     img_link,
+                     caption=" \n🛒 منتجك هو  : 🔥 \n"
+                     f" {title_link} 🛍 \n"
+                     f"  سعر المنتج  : "
+                     f" {price_pro}  دولار 💵\n"
+                     " \n قارن بين الاسعار واشتري 🔥 \n"
+                     "💰 عرض العملات (السعر النهائي عند الدفع)  : \n"
+                     f"الرابط {affiliate_link} \n"
+                     f"💎 عرض السوبر  : \n"
+                     f"الرابط {super_links} \n"
+                     f"♨️ عرض محدود  : \n"
+                     f"الرابط {limit_links} \n\n"
+                     "#MagicBot ✅",
+                     reply_markup=keyboard)
+
+    except:
+
+      bot.delete_message(message.chat.id, message_id)
+      bot.send_message(message.chat.id, "قارن بين الاسعار واشتري 🔥 \n"
+                       "💰 عرض العملات (السعر النهائي عند الدفع) : \n"
+                       f"الرابط {affiliate_link} \n"
+                       f"💎 عرض السوبر : \n"
+                       f"الرابط {super_links} \n"
+                       f"♨️ عرض محدود : \n"
+                       f"الرابط {limit_links} \n\n"
+                       "#MagicBot ✅",
+                       reply_markup=keyboard)
+
+  except:
+    bot.send_message(message.chat.id, "حدث خطأ 🤷🏻‍♂️")
+
 
 # In[6]:
 def extract_link(text):
