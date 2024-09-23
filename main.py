@@ -168,6 +168,7 @@ def get_affiliate_links(message, message_id, link):
                        f"الرابط {super_links} \n"
                        f"♨️ عرض محدود : \n"
                        f"الرابط {limit_links} \n\n"
+                       f" {sold_quantity}  دولار 💵\n"
                        "#MagicBot ✅",
                        reply_markup=keyboard)
 
