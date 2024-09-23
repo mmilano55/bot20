@@ -42,12 +42,12 @@ btn1 = types.InlineKeyboardButton("⭐️ألعاب لجمع العملات ال
 btn2 = types.InlineKeyboardButton("⭐️تخفيض العملات على منتجات السلة 🛒⭐️",
                                   callback_data='click')
 btn3 = types.InlineKeyboardButton("❤️ اشترك في القناة للمزيد من العروض ❤️",
-                                  url="https://t.me/AliXPromotion")
+                                  url="https://t.me/magicai5")
 btn4 = types.InlineKeyboardButton("🎬 شاهد كيفية عمل البوت 🎬",
-                                  url="https://t.me/AliXPromotion/8")
+                                  url="https://t.me/magicai5")
 btn5 = types.InlineKeyboardButton(
     "💰  حمل تطبيق Aliexpress عبر الضغط هنا للحصول على مكافأة 5 دولار  💰",
-    url="https://a.aliexpress.com/_mtV0j3q")
+    url="https://s.click.aliexpress.com/e/_DDeKnnV")
 keyboardStart.add(btn1, btn2, btn3, btn4, btn5)
 
 keyboard = types.InlineKeyboardMarkup(row_width=1)
@@ -56,22 +56,22 @@ btn1 = types.InlineKeyboardButton("⭐️ألعاب لجمع العملات ال
 btn2 = types.InlineKeyboardButton("⭐️تخفيض العملات على منتجات السلة 🛒⭐️",
                                   callback_data='click')
 btn3 = types.InlineKeyboardButton("❤️ اشترك في القناة للمزيد من العروض ❤️",
-                                  url="https://t.me/AliXPromotion")
+                                  url="https://t.me/magicai5")
 
 keyboard.add(btn1, btn2, btn3)
 
 keyboard_games = types.InlineKeyboardMarkup(row_width=1)
 btn1 = types.InlineKeyboardButton(
     " ⭐️ صفحة مراجعة وجمع النقاط يوميا ⭐️",
-    url="https://s.click.aliexpress.com/e/_on0MwkF")
+    url="https://s.click.aliexpress.com/e/_DCsvkSB")
 btn2 = types.InlineKeyboardButton(
-    "⭐️ لعبة Merge boss ⭐️", url="https://s.click.aliexpress.com/e/_DlCyg5Z")
+    "⭐️ لعبة Merge boss ⭐️", url="https:/a.aliexpress.com/_EvUvqFxZ")
 btn3 = types.InlineKeyboardButton(
     "⭐️ لعبة Fantastic Farm ⭐️",
-    url="https://s.click.aliexpress.com/e/_DBBkt9V")
+    url="https://s.click.aliexpress.com/e/_DmiYtgn")
 btn4 = types.InlineKeyboardButton(
     "⭐️ لعبة قلب الاوراق Flip ⭐️",
-    url="https://s.click.aliexpress.com/e/_DdcXZ2r")
+    url="https://s.click.aliexpress.com/e/_DkGJz7l")
 btn5 = types.InlineKeyboardButton(
     "⭐️ لعبة GoGo Match ⭐️", url="https://s.click.aliexpress.com/e/_DDs7W5D")
 keyboard_games.add(btn1, btn2, btn3, btn4, btn5)
