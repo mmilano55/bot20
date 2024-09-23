@@ -113,71 +113,64 @@ def button_click(callback_query):
 # In[5]:
 
 def get_affiliate_links(message, message_id, link):
+  try:
+
+    affiliate_link = aliexpress.get_affiliate_links(
+        f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=620&channel=coin&aff_fcid='
+    )
+    affiliate_link = affiliate_link[0].promotion_link
+
+    super_links = aliexpress.get_affiliate_links(
+        f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=562&aff_fcid='
+    )
+    super_links = super_links[0].promotion_link
+
+    limit_links = aliexpress.get_affiliate_links(
+        f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=561&aff_fcid='
+    )
+    limit_links = limit_links[0].promotion_link
+
     try:
-        affiliate_link = aliexpress.get_affiliate_links(
-            f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=620&channel=coin&aff_fcid='
-        )[0].promotion_link
+      img_link = aliexpress.get_products_details([
+          '1000006468625',
+          f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}'
+      ])
+      price_pro = img_link[0].target_sale_price
+      title_link = img_link[0].product_title
+      img_link = img_link[0].product_main_image_url
+      print(img_link)
+      bot.delete_message(message.chat.id, message_id)
+      bot.send_photo(message.chat.id,
+                     img_link,
+                     caption=" \n🛒 منتجك هو  : 🔥 \n"
+                     f" {title_link} 🛍 \n"
+                     f"  سعر المنتج  : "
+                     f" {price_pro}  دولار 💵\n"
+                     " \n قارن بين الاسعار واشتري 🔥 \n"
+                     "💰 عرض العملات (السعر النهائي عند الدفع)  : \n"
+                     f"الرابط {affiliate_link} \n"
+                     f"💎 عرض السوبر  : \n"
+                     f"الرابط {super_links} \n"
+                     f"♨️ عرض محدود  : \n"
+                     f"الرابط {limit_links} \n\n"
+                     "#MagicBot ✅",
+                     reply_markup=keyboard)
 
-        super_links = aliexpress.get_affiliate_links(
-            f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=562&aff_fcid='
-        )[0].promotion_link
+    except:
 
-        limit_links = aliexpress.get_affiliate_links(
-            f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}?sourceType=561&aff_fcid='
-        )[0].promotion_link
+      bot.delete_message(message.chat.id, message_id)
+      bot.send_message(message.chat.id, "قارن بين الاسعار واشتري 🔥 \n"
+                       "💰 عرض العملات (السعر النهائي عند الدفع) : \n"
+                       f"الرابط {affiliate_link} \n"
+                       f"💎 عرض السوبر : \n"
+                       f"الرابط {super_links} \n"
+                       f"♨️ عرض محدود : \n"
+                       f"الرابط {limit_links} \n\n"
+                       "#MagicBot ✅",
+                       reply_markup=keyboard)
 
-        try:
-            img_link = aliexpress.get_products_details([
-                '1000006468625',
-                f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}'
-            ])
-
-            price_pro = img_link[0].target_sale_price
-            title_link = img_link[0].product_title
-            img_url = img_link[0].product_main_image_url
-
-            # إضافة المعلومات المطلوبة
-            sold_quantity = img_link[0].total_sales  # عدد القطع المباعة
-            rating = img_link[0].average_rating  # تقييم المنتج
-            shipping_cost = img_link[0].shipping_fee  # تكاليف الشحن
-            followers = img_link[0].store_info.followers_count  # عدد المتابعين للمتجر
-
-            print(img_link)
-            bot.delete_message(message.chat.id, message_id)
-            bot.send_photo(message.chat.id,
-                           img_url,
-                           caption=f"🛒 منتجك هو: {title_link} 🔥\n"
-                                   f"سعر المنتج: {price_pro} دولار 💵\n"
-                                   f"📦 تكاليف الشحن: {shipping_cost} دولار\n"
-                                   f"✨ التقييم: {rating} من 5\n"
-                                   f"🛒 عدد القطع المباعة: {sold_quantity} قطعة\n"
-                                   f"👥 عدد المتابعين للمتجر: {followers}\n"
-                                   "قارن بين الأسعار واشتري 🔥\n"
-                                   "💰 عرض العملات (السعر النهائي عند الدفع):\n"
-                                   f"الرابط: {affiliate_link}\n"
-                                   f"💎 عرض السوبر:\n"
-                                   f"الرابط: {super_links}\n"
-                                   f"♨️ عرض محدود:\n"
-                                   f"الرابط: {limit_links}\n\n"
-                                   "#MagicBot ✅",
-                           reply_markup=keyboard)
-
-        except Exception as e:
-            bot.delete_message(message.chat.id, message_id)
-            bot.send_message(message.chat.id, "حدث خطأ أثناء جلب المعلومات.\n"
-                             f"خطأ: {str(e)}\n"
-                             "قارن بين الأسعار واشتري 🔥\n"
-                             "💰 عرض العملات (السعر النهائي عند الدفع):\n"
-                             f"الرابط: {affiliate_link}\n"
-                             f"💎 عرض السوبر:\n"
-                             f"الرابط: {super_links}\n"
-                             f"♨️ عرض محدود:\n"
-                             f"الرابط: {limit_links}\n\n"
-                             "#MagicBot ✅",
-                             reply_markup=keyboard)
-
-    except Exception as e:
-        bot.send_message(message.chat.id, f"حدث خطأ: {str(e)} 🤷🏻‍♂️")
+  except:
+    bot.send_message(message.chat.id, "حدث خطأ 🤷🏻‍♂️")
 
 # In[6]:
 def extract_link(text):
