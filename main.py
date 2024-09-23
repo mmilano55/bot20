@@ -267,7 +267,7 @@ def handle_games_callback(call):
 
 
 if __name__ == '__main__':
-    webhook_url = "https://bb342f2c-ef03-4dd8-adee-15e832527549-00-3pmbxkljq9162.worf.replit.dev/"
+    webhook_url = "https://bot20-yqao.onrender.com/"
     bot.remove_webhook()
     bot.set_webhook(url=webhook_url)
     app.run(host='0.0.0.0', port=3000)
