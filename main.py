@@ -13,8 +13,11 @@ import urllib.parse
 # إعداد البوت
 bot = telebot.TeleBot('7347607126:AAH9C09wOGfeXpq8Uk0c3VOrCgcee2yzjHU')
 # إعداد Aliexpress API
-aliexpress = AliexpressApi('509744', 'VMA05mD9CZloQdHTzhggTU6vxKJSZ9q8',
-                           models.Language.AR, models.Currency.USD, 'default')
+app_key = os.getenv('509744')
+app_secret = os.getenv('VMA05mD9CZloQdHTzhggTU6vxKJSZ9q8')
+
+# إعداد Aliexpress API باستخدام المتغيرات البيئية
+aliexpress = AliexpressApi(app_key, app_secret, models.Language.AR, models.Currency.USD, 'default')
 # إعداد Flask
 app = Flask(__name__)
 
