@@ -65,7 +65,7 @@ btn1 = types.InlineKeyboardButton(
     " ⭐️ صفحة مراجعة وجمع النقاط يوميا ⭐️",
     url="https://s.click.aliexpress.com/e/_DCsvkSB")
 btn2 = types.InlineKeyboardButton(
-    "⭐️ لعبة Merge boss ⭐️", url="https:/a.aliexpress.com/_EvUvqFxZ")
+    "⭐️ لعبة Merge boss ⭐️", url="https://a.aliexpress.com/_Exwy0Il")
 btn3 = types.InlineKeyboardButton(
     "⭐️ لعبة Fantastic Farm ⭐️",
     url="https://s.click.aliexpress.com/e/_DmiYtgn")
