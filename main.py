@@ -112,6 +112,7 @@ def button_click(callback_query):
 
 # In[5]:
 
+
 def get_affiliate_links(message, message_id, link):
   try:
 
@@ -136,7 +137,6 @@ def get_affiliate_links(message, message_id, link):
           f'https://star.aliexpress.com/share/share.htm?platform=AE&businessType=ProductDetail&redirectUrl={link}'
       ])
       price_pro = img_link[0].target_sale_price
-      sold_quantity = img_link[0].total_sales
       title_link = img_link[0].product_title
       img_link = img_link[0].product_main_image_url
       print(img_link)
@@ -145,7 +145,6 @@ def get_affiliate_links(message, message_id, link):
                      img_link,
                      caption=" \n🛒 منتجك هو  : 🔥 \n"
                      f" {title_link} 🛍 \n"
-                     f" {sold_quantity}  دولار 💵\n"
                      f"  سعر المنتج  : "
                      f" {price_pro}  دولار 💵\n"
                      " \n قارن بين الاسعار واشتري 🔥 \n"
@@ -164,7 +163,6 @@ def get_affiliate_links(message, message_id, link):
       bot.send_message(message.chat.id, "قارن بين الاسعار واشتري 🔥 \n"
                        "💰 عرض العملات (السعر النهائي عند الدفع) : \n"
                        f"الرابط {affiliate_link} \n"
-                       f" {sold_quantity}  دولار 💵\n"
                        f"💎 عرض السوبر : \n"
                        f"الرابط {super_links} \n"
                        f"♨️ عرض محدود : \n"
@@ -174,6 +172,7 @@ def get_affiliate_links(message, message_id, link):
 
   except:
     bot.send_message(message.chat.id, "حدث خطأ 🤷🏻‍♂️")
+
 
 # In[6]:
 def extract_link(text):
